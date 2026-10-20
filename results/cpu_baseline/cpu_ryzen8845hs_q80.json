@@ -1,0 +1,12 @@
+{
+  "tier": "cpu",
+  "device": "ryzen8845hs",
+  "quantization": "q80",
+  "metrics": {
+    "prefill_tokens_per_second": 109.37,
+    "decode_tokens_per_second": 6.39,
+    "time_to_first_token_ms": 490.28,
+    "mean_power_watts": 3.53,
+    "energy_joules_per_token": 0.5524
+  }
+}

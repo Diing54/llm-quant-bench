@@ -1,0 +1,1 @@
+Write a detailed, comprehensive essay explaining the history of the Linux kernel, its architecture, and why it became the dominant operating system for servers, supercomputers, and cloud infrastructure. Please provide at least three main sections, detailed technical examples, and a conclusion.

@@ -1,0 +1,12 @@
+{
+  "tier": "tier3",
+  "device": "780m",
+  "quantization": "q4km",
+  "metrics": {
+    "prefill_tokens_per_second": 177.2,
+    "decode_tokens_per_second": 14.39,
+    "time_to_first_token_ms": 299.11,
+    "mean_power_watts": 41.96,
+    "energy_joules_per_token": 2.9166
+  }
+}

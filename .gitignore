@@ -1,0 +1,14 @@
+# Models and Weights
+models/*.gguf
+llama.cpp-*/
+
+# Results and Logs
+results/*.json
+results/raw_logs/*.log
+power/logs/*.csv
+analysis/*.png
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
