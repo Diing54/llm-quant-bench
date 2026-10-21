@@ -82,7 +82,7 @@ This analysis evaluates estimated relative model accuracy retention against the 
 
 ## Repository Structure
 
-text
+```text
 .
 ├── analysis/
 │   ├── generate_report.py        # Aggregates multi-tier JSON metrics and prints terminal reports
@@ -101,4 +101,3 @@ text
 │   └── benchmark_prompt.txt      # Standardized input prompt context
 ├── README.md
 └── results/                      # JSON metrics, raw execution logs, and rendered graphs
-
