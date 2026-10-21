@@ -1,60 +1,57 @@
 #!/usr/bin/env python3
 import json
 import glob
-from pathlib import Path
 import matplotlib.pyplot as plt
+import seaborn as sns
+from pathlib import Path
 
-def main():
-    results = []
-    for path in sorted(glob.glob("results/**/*.json", recursive=True)):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                results.append(data)
-        except Exception as e:
-            print(f"Skipping {path}: {e}")
+sns.set_theme(style="darkgrid")
+fig, ax = plt.subplots(figsize=(11, 7))
 
-    if not results:
-        print("No result JSON files found under results/ !")
-        return
+tier_colors = {
+    "Tier 1: Edge Low-Power ARM": "#2ecc71",     # Green
+    "Tier 2: Ryzen 8845HS CPU": "#3498db",       # Blue
+    "Tier 3: Radeon 780M iGPU": "#9b59b6",       # Purple
+    "Tier 4: RTX 4070 Laptop dGPU": "#e74c3c"    # Red
+}
 
-    # Map by 'tier' to correctly catch cpu, tier3, and tier4
-    tiers = {
-        "cpu": {"name": "CPU (Ryzen 8845HS)", "color": "#1f77b4", "marker": "o"},
-        "tier3": {"name": "iGPU (Radeon 780M Vulkan)", "color": "#ff7f0e", "marker": "s"},
-        "tier4": {"name": "dGPU (RTX 4070 CUDA)", "color": "#2ca02c", "marker": "^"}
-    }
+tier_markers = {
+    "Tier 1: Edge Low-Power ARM": "o",
+    "Tier 2: Ryzen 8845HS CPU": "s",
+    "Tier 3: Radeon 780M iGPU": "^",
+    "Tier 4: RTX 4070 Laptop dGPU": "D"
+}
 
-    plt.figure(figsize=(11, 7))
+results = []
+for f in glob.glob("results/*.json"):
+    try:
+        data = json.loads(Path(f).read_text())
+        if "gen_tps" in data and "avg_power_w" in data:
+            results.append(data)
+    except Exception:
+        pass
 
-    for r in results:
-        tier = r.get("tier")
-        quant = r.get("quantization", "").upper()
-        metrics = r.get("metrics", {})
-        
-        decode = metrics.get("decode_tokens_per_second", 0.0)
-        energy = metrics.get("energy_joules_per_token", 0.0)
-
-        if tier in tiers and energy > 0 and decode > 0:
-            cfg = tiers[tier]
-            # Plot with thin black edge for high visual contrast
-            plt.scatter(energy, decode, color=cfg["color"], marker=cfg["marker"], s=130, edgecolors='black', linewidths=0.8, zorder=3)
-            plt.annotate(f"{tier}-{quant}", (energy, decode), textcoords="offset points", xytext=(0,9), ha='center', fontsize=9, fontweight='semibold', zorder=4)
-
-    plt.title("LLM Inference Pareto Frontier: Throughput vs. Energy Efficiency", fontsize=14, fontweight='bold', pad=20)
-    plt.xlabel("Energy Efficiency (Joules / Token) [Lower is Better — Log Scale]", fontsize=11, fontweight='semibold')
-    plt.ylabel("Decode Throughput (Tokens / Second) [Higher is Better]", fontsize=11, fontweight='semibold')
-    plt.xscale("log")
-    plt.grid(True, which="both", ls="--", alpha=0.6, zorder=1)
+for r in results:
+    tier = r.get("tier", "Unknown Tier")
+    color = tier_colors.get(tier, "#7f8c8d")
+    marker = tier_markers.get(tier, "o")
     
-    # Custom legend outside
-    handles = [plt.Line2D([0], [0], marker=cfg["marker"], color='w', markerfacecolor=cfg["color"], markersize=11, markeredgecolor='black', label=cfg["name"]) for cfg in tiers.values()]
-    plt.legend(handles=handles, loc='upper left', bbox_to_anchor=(1.02, 1.0), frameon=True, facecolor='#f8f9fa', edgecolor='#cccccc', fontsize=10)
+    tps = r["gen_tps"]
+    watts = r["avg_power_w"]
+    quant = r.get("quant", "")
 
-    plt.tight_layout()
-    plot_path = Path("results/pareto_frontier.png")
-    plt.savefig(plot_path, dpi=300, bbox_inches='tight')
-    print(f"Creative Pareto frontier plot updated successfully at {plot_path}")
+    ax.scatter(watts, tps, color=color, marker=marker, s=120, edgecolors="black", alpha=0.9, label=tier)
+    ax.annotate(f"{quant}", (watts, tps), textcoords="offset points", xytext=(5, 5), fontsize=9)
 
-if __name__ == "__main__":
-    main()
+# Clean up duplicate legend entries
+handles, labels = ax.get_legend_handles_labels()
+by_label = dict(zip(labels, handles))
+ax.legend(by_label.values(), by_label.keys(), loc="upper left", frameon=True)
+
+ax.set_title("Llama 3.2 3B Inference: 4-Tier Hardware Trade-Off (Throughput vs. Power)", fontsize=13, fontweight="bold")
+ax.set_xlabel("Average Package/Core Power (Watts)", fontsize=11)
+ax.set_ylabel("Generation Throughput (Tokens/sec)", fontsize=11)
+
+plt.tight_layout()
+plt.savefig("results/pareto_frontier.png", dpi=300)
+print("Updated Pareto chart saved to results/pareto_frontier.png")

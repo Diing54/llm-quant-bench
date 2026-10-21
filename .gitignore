@@ -1,14 +1,14 @@
-# Models and Weights
+# Ignore model weights
 models/*.gguf
-llama.cpp-*/
 
-# Results and Logs
-results/*.json
-results/raw_logs/*.log
-power/logs/*.csv
-analysis/*.png
+# Ignore compiled C++ binaries and cloned submodules
+llama.cpp*/
 
-# Python
+# Ignore raw high-frequency telemetry and text logs (we keep the parsed JSONs)
+results/raw_logs/
+results/raspberry_pi_5/*.csv
+
+# Python caches
 __pycache__/
-*.py[cod]
+*.pyc
 .venv/
