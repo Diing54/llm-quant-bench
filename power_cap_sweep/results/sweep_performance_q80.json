@@ -1,0 +1,14 @@
+{
+  "tier": "tier4_performance",
+  "device": "rtx4070",
+  "quantization": "q80",
+  "metrics": {
+    "prefill_tokens_per_second": 1638.92,
+    "decode_tokens_per_second": 55.61,
+    "time_to_first_token_ms": 32.36,
+    "mean_power_watts": 71.79,
+    "energy_joules_per_token": 1.2909
+  },
+  "platform_profile": "performance",
+  "hardware_tgp_watts": -1.0
+}
