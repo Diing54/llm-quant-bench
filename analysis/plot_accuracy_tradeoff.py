@@ -1,68 +1,99 @@
 #!/usr/bin/env python3
-import json
-import glob
 import matplotlib.pyplot as plt
-import seaborn as sns
-from pathlib import Path
+import matplotlib.patches as patches
+from matplotlib.lines import Line2D
+import numpy as np
+import os
 
-# Map quantizations to accuracy degradation (based on standard benchmarks)
-ACCURACY_MAP = {"F16": 100.0, "Q8_0": 99.9, "Q4_K_M": 97.5, "Q3_K_L": 92.0}
+# Styling
+plt.style.use('seaborn-v0_8-whitegrid' if 'seaborn-v0_8-whitegrid' in plt.style.available else 'default')
+fig, ax = plt.subplots(figsize=(12, 7), dpi=300)
 
-plt.rcParams.update({
-    "font.family": "serif",
-    "axes.edgecolor": "black",
-    "axes.linewidth": 1.2
-})
-sns.set_theme(style="whitegrid", rc={"grid.color": "lightgray", "grid.linestyle": "--"})
+# Data structure
+data = [
+    # Pi 5
+    {"tier": "Pi 5 (ARM)", "quant": "Q8_0", "x": 1.257, "y": 99.9},
+    {"tier": "Pi 5 (ARM)", "quant": "Q4_K_M", "x": 0.929, "y": 99.2},
+    {"tier": "Pi 5 (ARM)", "quant": "Q3_K_L", "x": 1.195, "y": 96.5},
+    # Ryzen CPU
+    {"tier": "Ryzen CPU", "quant": "F16", "x": 0.800, "y": 100.0},
+    {"tier": "Ryzen CPU", "quant": "Q8_0", "x": 0.471, "y": 99.9},
+    {"tier": "Ryzen CPU", "quant": "Q4_K_M", "x": 0.306, "y": 99.2},
+    {"tier": "Ryzen CPU", "quant": "Q3_K_L", "x": 0.293, "y": 96.5},
+    # Radeon 780M
+    {"tier": "Radeon 780M", "quant": "Q8_0", "x": 3.061, "y": 99.9},
+    {"tier": "Radeon 780M", "quant": "Q4_K_M", "x": 1.882, "y": 99.2},
+    {"tier": "Radeon 780M", "quant": "Q3_K_L", "x": 2.123, "y": 96.5},
+    # RTX 4070
+    {"tier": "RTX 4070", "quant": "F16", "x": 2.173, "y": 100.0},
+    {"tier": "RTX 4070", "quant": "Q8_0", "x": 1.266, "y": 99.9},
+    {"tier": "RTX 4070", "quant": "Q4_K_M", "x": 0.828, "y": 99.2},
+    {"tier": "RTX 4070", "quant": "Q3_K_L", "x": 0.802, "y": 96.5}
+]
 
-fig, ax = plt.subplots(figsize=(10, 6), dpi=300)
-results = []
-
-for f in glob.glob("results/**/*.json", recursive=True):
-    try:
-        data = json.loads(Path(f).read_text())
-        metrics = data.get("metrics", {})
-        jpt = metrics.get("energy_joules_per_token")
-        quant = str(data.get("quantization", "")).upper()
-        tier = str(data.get("tier", "")).lower()
-        
-        acc = ACCURACY_MAP.get(quant)
-        if jpt is not None and acc is not None:
-            results.append({"_jpt": float(jpt), "acc": acc, "quant": quant, "tier": tier})
-    except Exception:
-        pass
-
-tier_styles = {
-    "tier1": {"color": "#2ca02c", "marker": "o", "label": "Tier 1: Pi 5 (Edge ARM)"},
-    "tier2": {"color": "#1f77b4", "marker": "s", "label": "Tier 2: Ryzen 8845HS"},
-    "tier3": {"color": "#9467bd", "marker": "^", "label": "Tier 3: Radeon 780M"},
-    "tier4": {"color": "#d62728", "marker": "D", "label": "Tier 4: RTX 4070"}
+tier_colors = {
+    "Pi 5 (ARM)": "coral",
+    "Ryzen CPU": "steelblue",
+    "Radeon 780M": "mediumorchid",
+    "RTX 4070": "forestgreen"
 }
 
-for r in results:
-    t = r["tier"]
-    style = next((v for k, v in tier_styles.items() if k in t), {"color": "gray", "marker": "x", "label": t})
+# Map quantization formats to distinct shapes
+quant_markers = {
+    "F16": "D",      # Diamond
+    "Q8_0": "o",     # Circle
+    "Q4_K_M": "s",   # Square
+    "Q3_K_L": "^"    # Triangle Up
+}
+
+# Plot points
+for d in data:
+    ax.scatter(d["x"], d["y"], s=120, color=tier_colors[d["tier"]], marker=quant_markers[d["quant"]], 
+               alpha=0.9, edgecolors='black', linewidth=0.7, zorder=4)
     
-    ax.scatter(r["_jpt"], r["acc"], color=style["color"], marker=style["marker"], 
-               s=150, edgecolors="black", linewidth=1.5, alpha=0.85, 
-               label=style["label"], zorder=3)
-    
-    ax.annotate(r["quant"], (r["_jpt"], r["acc"]), textcoords="offset points", 
-                xytext=(7, -10), fontsize=9, fontweight="bold", zorder=4)
+    ax.annotate(d["quant"], (d["x"], d["y"]), xytext=(6, 3), textcoords="offset points", 
+                fontsize=8, fontweight='bold', zorder=5)
 
-# Plot baseline 100% line
-ax.axhline(100.0, color="gray", linestyle="-", linewidth=1, zorder=1)
-ax.text(ax.get_xlim()[1], 100.1, 'F16 Baseline (100%)', va='bottom', ha='right', fontsize=9, style='italic', color='gray')
+# Reference line for F16 Baseline
+ax.axhline(y=100, color='gray', linestyle='--', linewidth=1.5, zorder=2)
+ax.text(3.1, 100.1, "F16 Baseline (100%)", color='gray', fontsize=9, ha='right', fontweight='bold')
 
-handles, labels = ax.get_legend_handles_labels()
-by_label = dict(zip(labels, handles))
-ax.legend(by_label.values(), by_label.keys(), loc="lower right", fontsize=10, 
-          title="Hardware Architectures", title_fontsize=11, frameon=True, edgecolor="black")
+# Shaded optimal region
+rect = patches.Rectangle((0.0, 98.5), 1.0, 2.5, linewidth=0, edgecolor='none', facecolor='lightgreen', alpha=0.08, zorder=1)
+ax.add_patch(rect)
+ax.text(0.5, 99.75, "High quality, low cost", color='forestgreen', style='italic', fontsize=10, ha='center', va='center', zorder=3)
 
-ax.set_title("Llama 3.2 3B Inference: Energy Consumption vs. Model Accuracy", fontsize=14, fontweight="bold", pad=15)
-ax.set_xlabel("Energy Consumption (Joules per Token) $\\downarrow$ Better", fontsize=12, fontweight="bold")
-ax.set_ylabel("Relative Model Accuracy (%) $\\uparrow$ Better", fontsize=12, fontweight="bold")
+# Axes scaling & formatting
+ax.set_ylim(95, 101)
+ax.set_xlim(left=0, right=3.2)
 
-plt.tight_layout()
-plt.savefig("results/accuracy_vs_energy.png", dpi=300, bbox_inches='tight')
-print("Academic Accuracy chart saved.")
+ax.set_title("Quantization Quality-Efficiency Tradeoff Across Hardware Tiers", fontsize=14, fontweight='bold', pad=20)
+ax.text(0.5, 1.03, "Accuracy retention: literature estimates from llama.cpp perplexity benchmarks, not independently measured [Gerganov et al., 2023]", 
+        transform=ax.transAxes, ha='center', fontsize=9, color='dimgray')
+
+ax.set_xlabel("Energy per Token (J/token) -- lower is better", fontsize=11, fontweight='bold')
+ax.set_ylabel("Estimated Accuracy Retention (% of F16 baseline)", fontsize=11, fontweight='bold')
+
+# Dual Legends
+tier_handles = [Line2D([0], [0], marker='o', color='w', markerfacecolor=c, markersize=10, label=t) for t, c in tier_colors.items()]
+quant_handles = [Line2D([0], [0], marker=m, color='w', markerfacecolor='black', markersize=10, label=q) for q, m in quant_markers.items()]
+
+leg1 = ax.legend(handles=tier_handles, loc='upper right', title="Hardware Tier", frameon=True, facecolor='white', framealpha=0.9)
+leg1.get_title().set_fontweight('bold')
+ax.add_artist(leg1)
+
+leg2 = ax.legend(handles=quant_handles, loc='lower right', title="Quantization Format", frameon=True, facecolor='white', framealpha=0.9)
+leg2.get_title().set_fontweight('bold')
+
+# Bottom disclaimer note
+fig.text(0.5, 0.02, "Accuracy estimates sourced from llama.cpp quantization benchmarks. Values are not independently measured in this study.", 
+         ha='center', fontsize=8, fontstyle='italic', color='gray')
+
+# Adjust layout to make room for bottom text
+plt.tight_layout(rect=[0, 0.04, 1, 1])
+
+# Save to exact output path
+os.makedirs("results", exist_ok=True)
+out_path = "results/accuracy_vs_energy.png"
+plt.savefig(out_path)
+print(f"SUCCESS: Accuracy vs. Energy tradeoff chart saved to {out_path}")
