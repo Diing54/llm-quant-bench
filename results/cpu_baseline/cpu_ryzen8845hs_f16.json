@@ -3,10 +3,10 @@
   "device": "ryzen8845hs",
   "quantization": "f16",
   "metrics": {
-    "prefill_tokens_per_second": 56.18,
-    "decode_tokens_per_second": 3.57,
-    "time_to_first_token_ms": 943.7,
-    "mean_power_watts": 3.36,
-    "energy_joules_per_token": 0.9412
+    "prefill_tokens_per_second": 80.57,
+    "decode_tokens_per_second": 3.93,
+    "time_to_first_token_ms": 658.31,
+    "mean_power_watts": 3.15,
+    "energy_joules_per_token": 0.8004
   }
 }

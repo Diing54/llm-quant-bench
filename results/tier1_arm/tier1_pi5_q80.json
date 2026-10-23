@@ -1,9 +1,11 @@
 {
-  "device": "Raspberry Pi 5 (8GB, 2.0 GHz)",
-  "tier": "Tier 1: Edge Low-Power ARM",
-  "quant": "Q8_0",
-  "prompt_tps": 15.2,
-  "gen_tps": 2.8,
-  "avg_power_w": 2.985,
-  "tokens_per_joule": 0.938
+  "tier": "tier1_arm",
+  "device": "pi5",
+  "quantization": "q80",
+  "metrics": {
+    "prefill_tokens_per_second": 17.4,
+    "decode_tokens_per_second": 3.2,
+    "mean_power_watts": 4.02,
+    "energy_joules_per_token": 1.257
+  }
 }

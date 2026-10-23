@@ -1,0 +1,15 @@
+{
+  "tier": "tier4_low-power",
+  "device": "rtx4070",
+  "quantization": "q3kl",
+  "metrics": {
+    "prefill_tokens_per_second": 1778.87,
+    "decode_tokens_per_second": 77.98,
+    "time_to_first_token_ms": 30.82,
+    "mean_power_watts": 53.82,
+    "energy_joules_per_token": 0.6902
+  },
+  "acpi_profile": "low-power",
+  "hardware_tgp_watts": 65.0,
+  "study": "power_constrained_sweep"
+}

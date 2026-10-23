@@ -1,0 +1,523 @@
+build: 1 (2a63caa) with cc (GCC) 16.2.1 20260810 for x86_64-pc-linux-gnu
+main: llama backend init
+main: load the model and apply lora adapter, if any
+llama_model_loader: loaded meta data with 35 key-value pairs and 255 tensors from models/Llama-3.2-3B-Instruct-Q3_K_L.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = llama
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Llama 3.2 3B Instruct
+llama_model_loader: - kv   3:                           general.finetune str              = Instruct
+llama_model_loader: - kv   4:                           general.basename str              = Llama-3.2
+llama_model_loader: - kv   5:                         general.size_label str              = 3B
+llama_model_loader: - kv   6:                            general.license str              = llama3.2
+llama_model_loader: - kv   7:                               general.tags arr[str,6]       = ["facebook", "meta", "pytorch", "llam...
+llama_model_loader: - kv   8:                          general.languages arr[str,8]       = ["en", "de", "fr", "it", "pt", "hi", ...
+llama_model_loader: - kv   9:                          llama.block_count u32              = 28
+llama_model_loader: - kv  10:                       llama.context_length u32              = 131072
+llama_model_loader: - kv  11:                     llama.embedding_length u32              = 3072
+llama_model_loader: - kv  12:                  llama.feed_forward_length u32              = 8192
+llama_model_loader: - kv  13:                 llama.attention.head_count u32              = 24
+llama_model_loader: - kv  14:              llama.attention.head_count_kv u32              = 8
+llama_model_loader: - kv  15:                       llama.rope.freq_base f32              = 500000.000000
+llama_model_loader: - kv  16:     llama.attention.layer_norm_rms_epsilon f32              = 0.000010
+llama_model_loader: - kv  17:                 llama.attention.key_length u32              = 128
+llama_model_loader: - kv  18:               llama.attention.value_length u32              = 128
+llama_model_loader: - kv  19:                          general.file_type u32              = 13
+llama_model_loader: - kv  20:                           llama.vocab_size u32              = 128256
+llama_model_loader: - kv  21:                 llama.rope.dimension_count u32              = 128
+llama_model_loader: - kv  22:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  23:                         tokenizer.ggml.pre str              = llama-bpe
+llama_model_loader: - kv  24:                      tokenizer.ggml.tokens arr[str,128256]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  25:                  tokenizer.ggml.token_type arr[i32,128256]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  26:                      tokenizer.ggml.merges arr[str,280147]  = ["Ġ Ġ", "Ġ ĠĠĠ", "ĠĠ ĠĠ", "...
+llama_model_loader: - kv  27:                tokenizer.ggml.bos_token_id u32              = 128000
+llama_model_loader: - kv  28:                tokenizer.ggml.eos_token_id u32              = 128009
+llama_model_loader: - kv  29:                    tokenizer.chat_template str              = {{- bos_token }}\n{%- if custom_tools ...
+llama_model_loader: - kv  30:               general.quantization_version u32              = 2
+llama_model_loader: - kv  31:                      quantize.imatrix.file str              = /models_out/Llama-3.2-3B-Instruct-GGU...
+llama_model_loader: - kv  32:                   quantize.imatrix.dataset str              = /training_dir/calibration_datav3.txt
+llama_model_loader: - kv  33:             quantize.imatrix.entries_count i32              = 196
+llama_model_loader: - kv  34:              quantize.imatrix.chunks_count i32              = 125
+llama_model_loader: - type  f32:   58 tensors
+llama_model_loader: - type q3_K:  112 tensors
+llama_model_loader: - type q5_K:   84 tensors
+llama_model_loader: - type q6_K:    1 tensors
+llm_load_vocab: special tokens cache size = 256
+llm_load_vocab: token to piece cache size = 0.7999 MB
+llm_load_print_meta: format           = GGUF V3 (latest)
+llm_load_print_meta: arch             = llama
+llm_load_print_meta: vocab type       = BPE
+llm_load_print_meta: n_vocab          = 128256
+llm_load_print_meta: n_merges         = 280147
+llm_load_print_meta: vocab_only       = 0
+llm_load_print_meta: n_ctx_train      = 131072
+llm_load_print_meta: n_embd           = 3072
+llm_load_print_meta: n_layer          = 28
+llm_load_print_meta: n_head           = 24
+llm_load_print_meta: n_head_kv        = 8
+llm_load_print_meta: n_rot            = 128
+llm_load_print_meta: n_swa            = 0
+llm_load_print_meta: n_embd_head_k    = 128
+llm_load_print_meta: n_embd_head_v    = 128
+llm_load_print_meta: n_gqa            = 3
+llm_load_print_meta: n_embd_k_gqa     = 1024
+llm_load_print_meta: n_embd_v_gqa     = 1024
+llm_load_print_meta: f_norm_eps       = 0.0e+00
+llm_load_print_meta: f_norm_rms_eps   = 1.0e-05
+llm_load_print_meta: f_clamp_kqv      = 0.0e+00
+llm_load_print_meta: f_max_alibi_bias = 0.0e+00
+llm_load_print_meta: f_logit_scale    = 0.0e+00
+llm_load_print_meta: n_ff             = 8192
+llm_load_print_meta: n_expert         = 0
+llm_load_print_meta: n_expert_used    = 0
+llm_load_print_meta: causal attn      = 1
+llm_load_print_meta: pooling type     = 0
+llm_load_print_meta: rope type        = 0
+llm_load_print_meta: rope scaling     = linear
+llm_load_print_meta: freq_base_train  = 500000.0
+llm_load_print_meta: freq_scale_train = 1
+llm_load_print_meta: n_ctx_orig_yarn  = 131072
+llm_load_print_meta: rope_finetuned   = unknown
+llm_load_print_meta: ssm_d_conv       = 0
+llm_load_print_meta: ssm_d_inner      = 0
+llm_load_print_meta: ssm_d_state      = 0
+llm_load_print_meta: ssm_dt_rank      = 0
+llm_load_print_meta: ssm_dt_b_c_rms   = 0
+llm_load_print_meta: model type       = ?B
+llm_load_print_meta: model ftype      = Q3_K - Large
+llm_load_print_meta: model params     = 3.21 B
+llm_load_print_meta: model size       = 1.68 GiB (4.50 BPW) 
+llm_load_print_meta: general.name     = Llama 3.2 3B Instruct
+llm_load_print_meta: BOS token        = 128000 '<|begin_of_text|>'
+llm_load_print_meta: EOS token        = 128009 '<|eot_id|>'
+llm_load_print_meta: LF token         = 128 'Ä'
+llm_load_print_meta: EOT token        = 128009 '<|eot_id|>'
+llm_load_print_meta: max token length = 256
+ggml_cuda_init: GGML_CUDA_FORCE_MMQ:    no
+ggml_cuda_init: GGML_CUDA_FORCE_CUBLAS: no
+ggml_cuda_init: found 1 CUDA devices:
+  Device 0: NVIDIA GeForce RTX 4070 Laptop GPU, compute capability 8.9, VMM: yes
+llm_load_tensors: ggml ctx size =    0.24 MiB
+llm_load_tensors: offloading 28 repeating layers to GPU
+llm_load_tensors: offloading non-repeating layers to GPU
+llm_load_tensors: offloaded 29/29 layers to GPU
+llm_load_tensors:        CPU buffer size =   308.23 MiB
+llm_load_tensors:      CUDA0 buffer size =  1723.78 MiB
+........................................................................
+llama_new_context_with_model: n_ctx      = 2048
+llama_new_context_with_model: n_batch    = 2048
+llama_new_context_with_model: n_ubatch   = 512
+llama_new_context_with_model: flash_attn = 0
+llama_new_context_with_model: freq_base  = 500000.0
+llama_new_context_with_model: freq_scale = 1
+llama_kv_cache_init:      CUDA0 KV buffer size =   224.00 MiB
+llama_new_context_with_model: KV self size  =  224.00 MiB, K (f16):  112.00 MiB, V (f16):  112.00 MiB
+llama_new_context_with_model:  CUDA_Host  output buffer size =     0.49 MiB
+llama_new_context_with_model:      CUDA0 compute buffer size =   256.50 MiB
+llama_new_context_with_model:  CUDA_Host compute buffer size =    10.01 MiB
+llama_new_context_with_model: graph nodes  = 902
+llama_new_context_with_model: graph splits = 2
+llama_init_from_gpt_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+main: llama threadpool init, n_threads = 8
+
+system_info: n_threads = 8 (n_threads_batch = 8) / 16 | AVX = 1 | AVX_VNNI = 0 | AVX2 = 1 | AVX512 = 1 | AVX512_VBMI = 1 | AVX512_VNNI = 1 | AVX512_BF16 = 1 | FMA = 1 | NEON = 0 | SVE = 0 | ARM_FMA = 0 | F16C = 1 | FP16_VA = 0 | RISCV_VECT = 0 | WASM_SIMD = 0 | BLAS = 1 | SSE3 = 1 | SSSE3 = 1 | VSX = 0 | MATMUL_INT8 = 0 | LLAMAFILE = 1 | 
+
+sampler seed: 1242335701
+sampler params: 
+	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+	top_k = 40, tfs_z = 1.000, top_p = 0.950, min_p = 0.050, typical_p = 1.000, temp = 0.800
+	mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000
+sampler chain: logits -> logit-bias -> penalties -> top-k -> tail-free -> typical -> top-p -> min-p -> temp-ext -> softmax -> dist 
+generate: n_ctx = 2048, n_batch = 2048, n_predict = 999, n_keep = 1
+
+Write a detailed, comprehensive essay explaining the history of the Linux kernel, its architecture, and why it became the dominant operating system for servers, supercomputers, and cloud infrastructure. Please provide at least three main sections, detailed technical examples, and a conclusion. 
+
+The history of the Linux kernel is a story of open-source innovation, driven by the vision of Linus Torvalds and a community of developers who have shaped the operating system into what it is today. The kernel has undergone significant transformations over the years, evolving from a simple, single-user operating system to a robust, multi-user, and highly scalable platform for modern computing.
+
+**Section 1: The Early Years of Linux (1987-1991)**
+
+The Linux kernel has its roots in 1987, when Finnish computer science student Linus Torvalds began working on a kernel for his minicomputer, the Acorn Archimedes. Torvalds' initial goal was to create a kernel that would be compatible with the Minix operating system, which was widely used at the time. However, as he continued to work on the project, he realized that he wanted to create a kernel that was not only compatible with Minix but also open-source and free to use. This vision of an open-source operating system was revolutionary at the time, as most operating systems were proprietary and closed-source.
+
+In 1991, Torvalds released version 0.01 of the Linux kernel, which was the first public release of the kernel. The kernel was initially intended for the Acorn Archimedes, but it quickly gained popularity among other developers who were working on similar projects. The Linux kernel was initially designed to be a replacement for Minix, but it soon became its own entity, with its own architecture and features.
+
+**Section 2: The Linux Kernel Architecture**
+
+The Linux kernel architecture is based on a modular design, where the kernel is divided into several components, each with its own specific functions. The kernel is divided into the following main components:
+
+*   The kernel code itself, which is written in C and provides the core functionality of the operating system.
+*   The device drivers, which provide the interface between the kernel and the hardware devices.
+*   The file system, which provides the storage and retrieval of data.
+*   The networking, which provides the interface to the network.
+
+The Linux kernel uses a microkernel architecture, where the kernel is divided into two separate components: the kernel core and the device drivers. The kernel core provides the basic functionality of the operating system, while the device drivers provide the interface to the hardware devices. This architecture allows for greater flexibility and modularity, making it easier to add new features and functionality to the kernel.
+
+One of the key features of the Linux kernel is its use of the ring buffer, which is a circular buffer that stores data in a ring-shaped structure. The ring buffer allows for efficient storage and retrieval of data, making it ideal for use in high-performance applications such as servers and supercomputers.
+
+**Section 3: The Rise of Linux as a Server Operating System**
+
+The Linux kernel became popular as a server operating system in the late 1990s, thanks in part to the work of several developers who were working on Linux-based servers. One of the key developers was Jeremy Soller, who created the Linux Standard Base (LSB) initiative, which provided a set of standards for Linux-based servers. The LSB initiative helped to establish Linux as a viable alternative to other server operating systems, such as Windows and Unix.
+
+In the early 2000s, Linux began to gain popularity as a cloud infrastructure operating system, thanks in part to the work of several cloud providers who were using Linux-based servers. Cloud providers such as Amazon Web Services (AWS) and Google Cloud Platform (GCP) began to use Linux as their underlying operating system, and Linux-based servers became a popular choice for cloud computing.
+
+Today, Linux is the dominant operating system for servers, supercomputers, and cloud infrastructure. Its popularity can be attributed to its flexibility, scalability, and performance, making it an ideal choice for a wide range of applications and workloads. The Linux kernel has come a long way since its early days, and it continues to evolve and improve, making it an essential component of modern computing.
+
+In conclusion, the Linux kernel has a rich history that spans over three decades. From its humble beginnings as a simple kernel for a minicomputer to its current status as a dominant operating system for servers, supercomputers, and cloud infrastructure, Linux has evolved significantly over the years. Its modular design, flexibility, and scalability make it an ideal choice for a wide range of applications and workloads. The Linux kernel continues to be a driving force in the development of modern computing, and its impact will be felt for years to come.
+
+The Linux kernel has also been influenced by various other operating systems, such as Minix and Unix, and has borrowed some of their features. However, Linux has also introduced several features that are unique to the operating system, such as the use of the ring buffer and the microkernel architecture. The Linux kernel has also been influenced by the development of the Internet and
+
+llama_perf_sampler_print:    sampling time =      46.53 ms /  1052 runs   (    0.04 ms per token, 22610.53 tokens per second)
+llama_perf_context_print:        load time =     817.08 ms
+llama_perf_context_print: prompt eval time =      39.25 ms /    53 tokens (    0.74 ms per token,  1350.28 tokens per second)
+llama_perf_context_print:        eval time =   11440.32 ms /   998 runs   (   11.46 ms per token,    87.24 tokens per second)
+llama_perf_context_print:       total time =   11653.62 ms /  1051 tokens
+build: 1 (2a63caa) with cc (GCC) 16.2.1 20260810 for x86_64-pc-linux-gnu
+main: llama backend init
+main: load the model and apply lora adapter, if any
+llama_model_loader: loaded meta data with 35 key-value pairs and 255 tensors from models/Llama-3.2-3B-Instruct-Q3_K_L.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = llama
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Llama 3.2 3B Instruct
+llama_model_loader: - kv   3:                           general.finetune str              = Instruct
+llama_model_loader: - kv   4:                           general.basename str              = Llama-3.2
+llama_model_loader: - kv   5:                         general.size_label str              = 3B
+llama_model_loader: - kv   6:                            general.license str              = llama3.2
+llama_model_loader: - kv   7:                               general.tags arr[str,6]       = ["facebook", "meta", "pytorch", "llam...
+llama_model_loader: - kv   8:                          general.languages arr[str,8]       = ["en", "de", "fr", "it", "pt", "hi", ...
+llama_model_loader: - kv   9:                          llama.block_count u32              = 28
+llama_model_loader: - kv  10:                       llama.context_length u32              = 131072
+llama_model_loader: - kv  11:                     llama.embedding_length u32              = 3072
+llama_model_loader: - kv  12:                  llama.feed_forward_length u32              = 8192
+llama_model_loader: - kv  13:                 llama.attention.head_count u32              = 24
+llama_model_loader: - kv  14:              llama.attention.head_count_kv u32              = 8
+llama_model_loader: - kv  15:                       llama.rope.freq_base f32              = 500000.000000
+llama_model_loader: - kv  16:     llama.attention.layer_norm_rms_epsilon f32              = 0.000010
+llama_model_loader: - kv  17:                 llama.attention.key_length u32              = 128
+llama_model_loader: - kv  18:               llama.attention.value_length u32              = 128
+llama_model_loader: - kv  19:                          general.file_type u32              = 13
+llama_model_loader: - kv  20:                           llama.vocab_size u32              = 128256
+llama_model_loader: - kv  21:                 llama.rope.dimension_count u32              = 128
+llama_model_loader: - kv  22:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  23:                         tokenizer.ggml.pre str              = llama-bpe
+llama_model_loader: - kv  24:                      tokenizer.ggml.tokens arr[str,128256]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  25:                  tokenizer.ggml.token_type arr[i32,128256]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  26:                      tokenizer.ggml.merges arr[str,280147]  = ["Ġ Ġ", "Ġ ĠĠĠ", "ĠĠ ĠĠ", "...
+llama_model_loader: - kv  27:                tokenizer.ggml.bos_token_id u32              = 128000
+llama_model_loader: - kv  28:                tokenizer.ggml.eos_token_id u32              = 128009
+llama_model_loader: - kv  29:                    tokenizer.chat_template str              = {{- bos_token }}\n{%- if custom_tools ...
+llama_model_loader: - kv  30:               general.quantization_version u32              = 2
+llama_model_loader: - kv  31:                      quantize.imatrix.file str              = /models_out/Llama-3.2-3B-Instruct-GGU...
+llama_model_loader: - kv  32:                   quantize.imatrix.dataset str              = /training_dir/calibration_datav3.txt
+llama_model_loader: - kv  33:             quantize.imatrix.entries_count i32              = 196
+llama_model_loader: - kv  34:              quantize.imatrix.chunks_count i32              = 125
+llama_model_loader: - type  f32:   58 tensors
+llama_model_loader: - type q3_K:  112 tensors
+llama_model_loader: - type q5_K:   84 tensors
+llama_model_loader: - type q6_K:    1 tensors
+llm_load_vocab: special tokens cache size = 256
+llm_load_vocab: token to piece cache size = 0.7999 MB
+llm_load_print_meta: format           = GGUF V3 (latest)
+llm_load_print_meta: arch             = llama
+llm_load_print_meta: vocab type       = BPE
+llm_load_print_meta: n_vocab          = 128256
+llm_load_print_meta: n_merges         = 280147
+llm_load_print_meta: vocab_only       = 0
+llm_load_print_meta: n_ctx_train      = 131072
+llm_load_print_meta: n_embd           = 3072
+llm_load_print_meta: n_layer          = 28
+llm_load_print_meta: n_head           = 24
+llm_load_print_meta: n_head_kv        = 8
+llm_load_print_meta: n_rot            = 128
+llm_load_print_meta: n_swa            = 0
+llm_load_print_meta: n_embd_head_k    = 128
+llm_load_print_meta: n_embd_head_v    = 128
+llm_load_print_meta: n_gqa            = 3
+llm_load_print_meta: n_embd_k_gqa     = 1024
+llm_load_print_meta: n_embd_v_gqa     = 1024
+llm_load_print_meta: f_norm_eps       = 0.0e+00
+llm_load_print_meta: f_norm_rms_eps   = 1.0e-05
+llm_load_print_meta: f_clamp_kqv      = 0.0e+00
+llm_load_print_meta: f_max_alibi_bias = 0.0e+00
+llm_load_print_meta: f_logit_scale    = 0.0e+00
+llm_load_print_meta: n_ff             = 8192
+llm_load_print_meta: n_expert         = 0
+llm_load_print_meta: n_expert_used    = 0
+llm_load_print_meta: causal attn      = 1
+llm_load_print_meta: pooling type     = 0
+llm_load_print_meta: rope type        = 0
+llm_load_print_meta: rope scaling     = linear
+llm_load_print_meta: freq_base_train  = 500000.0
+llm_load_print_meta: freq_scale_train = 1
+llm_load_print_meta: n_ctx_orig_yarn  = 131072
+llm_load_print_meta: rope_finetuned   = unknown
+llm_load_print_meta: ssm_d_conv       = 0
+llm_load_print_meta: ssm_d_inner      = 0
+llm_load_print_meta: ssm_d_state      = 0
+llm_load_print_meta: ssm_dt_rank      = 0
+llm_load_print_meta: ssm_dt_b_c_rms   = 0
+llm_load_print_meta: model type       = ?B
+llm_load_print_meta: model ftype      = Q3_K - Large
+llm_load_print_meta: model params     = 3.21 B
+llm_load_print_meta: model size       = 1.68 GiB (4.50 BPW) 
+llm_load_print_meta: general.name     = Llama 3.2 3B Instruct
+llm_load_print_meta: BOS token        = 128000 '<|begin_of_text|>'
+llm_load_print_meta: EOS token        = 128009 '<|eot_id|>'
+llm_load_print_meta: LF token         = 128 'Ä'
+llm_load_print_meta: EOT token        = 128009 '<|eot_id|>'
+llm_load_print_meta: max token length = 256
+ggml_cuda_init: GGML_CUDA_FORCE_MMQ:    no
+ggml_cuda_init: GGML_CUDA_FORCE_CUBLAS: no
+ggml_cuda_init: found 1 CUDA devices:
+  Device 0: NVIDIA GeForce RTX 4070 Laptop GPU, compute capability 8.9, VMM: yes
+llm_load_tensors: ggml ctx size =    0.24 MiB
+llm_load_tensors: offloading 28 repeating layers to GPU
+llm_load_tensors: offloading non-repeating layers to GPU
+llm_load_tensors: offloaded 29/29 layers to GPU
+llm_load_tensors:        CPU buffer size =   308.23 MiB
+llm_load_tensors:      CUDA0 buffer size =  1723.78 MiB
+........................................................................
+llama_new_context_with_model: n_ctx      = 2048
+llama_new_context_with_model: n_batch    = 2048
+llama_new_context_with_model: n_ubatch   = 512
+llama_new_context_with_model: flash_attn = 0
+llama_new_context_with_model: freq_base  = 500000.0
+llama_new_context_with_model: freq_scale = 1
+llama_kv_cache_init:      CUDA0 KV buffer size =   224.00 MiB
+llama_new_context_with_model: KV self size  =  224.00 MiB, K (f16):  112.00 MiB, V (f16):  112.00 MiB
+llama_new_context_with_model:  CUDA_Host  output buffer size =     0.49 MiB
+llama_new_context_with_model:      CUDA0 compute buffer size =   256.50 MiB
+llama_new_context_with_model:  CUDA_Host compute buffer size =    10.01 MiB
+llama_new_context_with_model: graph nodes  = 902
+llama_new_context_with_model: graph splits = 2
+llama_init_from_gpt_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+main: llama threadpool init, n_threads = 8
+
+system_info: n_threads = 8 (n_threads_batch = 8) / 16 | AVX = 1 | AVX_VNNI = 0 | AVX2 = 1 | AVX512 = 1 | AVX512_VBMI = 1 | AVX512_VNNI = 1 | AVX512_BF16 = 1 | FMA = 1 | NEON = 0 | SVE = 0 | ARM_FMA = 0 | F16C = 1 | FP16_VA = 0 | RISCV_VECT = 0 | WASM_SIMD = 0 | BLAS = 1 | SSE3 = 1 | SSSE3 = 1 | VSX = 0 | MATMUL_INT8 = 0 | LLAMAFILE = 1 | 
+
+sampler seed: 2107517938
+sampler params: 
+	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+	top_k = 40, tfs_z = 1.000, top_p = 0.950, min_p = 0.050, typical_p = 1.000, temp = 0.800
+	mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000
+sampler chain: logits -> logit-bias -> penalties -> top-k -> tail-free -> typical -> top-p -> min-p -> temp-ext -> softmax -> dist 
+generate: n_ctx = 2048, n_batch = 2048, n_predict = 999, n_keep = 1
+
+Write a detailed, comprehensive essay explaining the history of the Linux kernel, its architecture, and why it became the dominant operating system for servers, supercomputers, and cloud infrastructure. Please provide at least three main sections, detailed technical examples, and a conclusion. 
+
+The essay will explore the early development of the Linux kernel, its evolution, and its current state, including its architecture, features, and use cases. We will also discuss the factors that contributed to its success and dominance in the server, supercomputer, and cloud computing environments.
+
+**The Early Development of the Linux Kernel (1991-2001)**
+The Linux kernel has its roots in 1991, when Linus Torvalds, a Finnish computer science student, began working on a Unix-like operating system for personal computers. Torvalds was inspired by the Unix operating system and wanted to create an operating system that was free and open-source. He started by porting the Unix kernel to a 68000 processor and later created a new kernel based on the Minix operating system. The first version of the Linux kernel, Linux 0.01, was released on September 17, 1991.
+
+Initially, the Linux kernel was designed for personal computers, but it quickly gained popularity among developers and researchers. In 1992, Linus Torvalds released Linux 1.0, which included many improvements and features. The kernel was also ported to other platforms, including the DECStation 5000. The Linux kernel gained further traction in the mid-1990s with the release of Linux 2.0, which included a new VFS (Virtual File System), a new scheduler, and improved support for network protocols.
+
+**The Linux Kernel's Evolution and Architecture (2002-2010)**
+In the early 2000s, the Linux kernel underwent significant changes and improvements. The introduction of the preemptible kernel in Linux 2.3 (2001) allowed the kernel to better handle concurrent tasks and improve overall system performance. The Linux kernel also gained support for new hardware platforms, including the x86-64 and ARM architectures.
+
+In 2004, the Linux kernel's architecture was significantly improved with the introduction of the "new kernel" architecture, which included a new process model, improved memory management, and enhanced security features. The "new kernel" architecture also introduced the concept of the "kernel thread," which allowed for better multitasking and improved system performance.
+
+In 2007, the Linux kernel was merged with the Xen virtualization platform, creating the Linux Xen kernel. This merge allowed for better integration of the Linux kernel with the Xen hypervisor, enabling virtualization of the Linux kernel.
+
+**The Linux Kernel's Dominance in Servers, Supercomputers, and Cloud Infrastructure (2010-Present)**
+In the 2010s, the Linux kernel's dominance in the server, supercomputer, and cloud infrastructure environments became apparent. The Linux kernel's architecture, scalability, and flexibility made it an ideal choice for large-scale computing applications.
+
+The Linux kernel's adoption in the cloud computing market was further accelerated by the rise of cloud providers such as Amazon Web Services (AWS), Google Cloud Platform (GCP), and Microsoft Azure. These providers offered Linux-based services, such as Linux instances, and Linux-based tools, such as Docker and Kubernetes.
+
+Today, the Linux kernel is the dominant operating system for servers, supercomputers, and cloud infrastructure. Its popularity can be attributed to its:
+
+1.  **Scalability**: The Linux kernel is designed to scale from small embedded systems to large-scale servers and supercomputers.
+2.  **Flexibility**: The Linux kernel's architecture allows for customization and extension to meet the specific needs of various applications.
+3.  **Security**: The Linux kernel includes robust security features, such as SELinux and AppArmor, which provide protection against malicious software and unauthorized access.
+4.  **Community**: The Linux kernel has a vast and active community of developers, which contributes to its ongoing development and improvement.
+
+In conclusion, the Linux kernel's history, architecture, and features have contributed to its dominance in the server, supercomputer, and cloud computing environments. Its scalability, flexibility, security, and community have made it an ideal choice for large-scale computing applications. As the Linux kernel continues to evolve, it is likely to remain the dominant operating system for servers, supercomputers, and cloud infrastructure. 
+
+Technical examples of the Linux kernel's architecture and features include:
+
+*   **Memory Management**: The Linux kernel uses a combination of caching and virtual memory to manage memory. The kernel also uses a "page table" to map physical memory to virtual memory pages, allowing for efficient use of memory and improved system performance.
+*   **Process Model**: The Linux kernel uses a preemptible process model, which allows the kernel to interrupt and interrupt other processes to prioritize tasks. This model enables the kernel to handle concurrent tasks and improve overall system performance.
+*   **Networking**: The Linux kernel includes support for a wide range of network protocols, including TCP/IP, HTTP, and FTP. The kernel also includes support for network interfaces, such as Ethernet and Wi-Fi, and network protocols
+
+llama_perf_sampler_print:    sampling time =      49.80 ms /  1052 runs   (    0.05 ms per token, 21126.62 tokens per second)
+llama_perf_context_print:        load time =     781.13 ms
+llama_perf_context_print: prompt eval time =      25.92 ms /    53 tokens (    0.49 ms per token,  2044.52 tokens per second)
+llama_perf_context_print:        eval time =   11466.74 ms /   998 runs   (   11.49 ms per token,    87.03 tokens per second)
+llama_perf_context_print:       total time =   11669.89 ms /  1051 tokens
+build: 1 (2a63caa) with cc (GCC) 16.2.1 20260810 for x86_64-pc-linux-gnu
+main: llama backend init
+main: load the model and apply lora adapter, if any
+llama_model_loader: loaded meta data with 35 key-value pairs and 255 tensors from models/Llama-3.2-3B-Instruct-Q3_K_L.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = llama
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Llama 3.2 3B Instruct
+llama_model_loader: - kv   3:                           general.finetune str              = Instruct
+llama_model_loader: - kv   4:                           general.basename str              = Llama-3.2
+llama_model_loader: - kv   5:                         general.size_label str              = 3B
+llama_model_loader: - kv   6:                            general.license str              = llama3.2
+llama_model_loader: - kv   7:                               general.tags arr[str,6]       = ["facebook", "meta", "pytorch", "llam...
+llama_model_loader: - kv   8:                          general.languages arr[str,8]       = ["en", "de", "fr", "it", "pt", "hi", ...
+llama_model_loader: - kv   9:                          llama.block_count u32              = 28
+llama_model_loader: - kv  10:                       llama.context_length u32              = 131072
+llama_model_loader: - kv  11:                     llama.embedding_length u32              = 3072
+llama_model_loader: - kv  12:                  llama.feed_forward_length u32              = 8192
+llama_model_loader: - kv  13:                 llama.attention.head_count u32              = 24
+llama_model_loader: - kv  14:              llama.attention.head_count_kv u32              = 8
+llama_model_loader: - kv  15:                       llama.rope.freq_base f32              = 500000.000000
+llama_model_loader: - kv  16:     llama.attention.layer_norm_rms_epsilon f32              = 0.000010
+llama_model_loader: - kv  17:                 llama.attention.key_length u32              = 128
+llama_model_loader: - kv  18:               llama.attention.value_length u32              = 128
+llama_model_loader: - kv  19:                          general.file_type u32              = 13
+llama_model_loader: - kv  20:                           llama.vocab_size u32              = 128256
+llama_model_loader: - kv  21:                 llama.rope.dimension_count u32              = 128
+llama_model_loader: - kv  22:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  23:                         tokenizer.ggml.pre str              = llama-bpe
+llama_model_loader: - kv  24:                      tokenizer.ggml.tokens arr[str,128256]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  25:                  tokenizer.ggml.token_type arr[i32,128256]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  26:                      tokenizer.ggml.merges arr[str,280147]  = ["Ġ Ġ", "Ġ ĠĠĠ", "ĠĠ ĠĠ", "...
+llama_model_loader: - kv  27:                tokenizer.ggml.bos_token_id u32              = 128000
+llama_model_loader: - kv  28:                tokenizer.ggml.eos_token_id u32              = 128009
+llama_model_loader: - kv  29:                    tokenizer.chat_template str              = {{- bos_token }}\n{%- if custom_tools ...
+llama_model_loader: - kv  30:               general.quantization_version u32              = 2
+llama_model_loader: - kv  31:                      quantize.imatrix.file str              = /models_out/Llama-3.2-3B-Instruct-GGU...
+llama_model_loader: - kv  32:                   quantize.imatrix.dataset str              = /training_dir/calibration_datav3.txt
+llama_model_loader: - kv  33:             quantize.imatrix.entries_count i32              = 196
+llama_model_loader: - kv  34:              quantize.imatrix.chunks_count i32              = 125
+llama_model_loader: - type  f32:   58 tensors
+llama_model_loader: - type q3_K:  112 tensors
+llama_model_loader: - type q5_K:   84 tensors
+llama_model_loader: - type q6_K:    1 tensors
+llm_load_vocab: special tokens cache size = 256
+llm_load_vocab: token to piece cache size = 0.7999 MB
+llm_load_print_meta: format           = GGUF V3 (latest)
+llm_load_print_meta: arch             = llama
+llm_load_print_meta: vocab type       = BPE
+llm_load_print_meta: n_vocab          = 128256
+llm_load_print_meta: n_merges         = 280147
+llm_load_print_meta: vocab_only       = 0
+llm_load_print_meta: n_ctx_train      = 131072
+llm_load_print_meta: n_embd           = 3072
+llm_load_print_meta: n_layer          = 28
+llm_load_print_meta: n_head           = 24
+llm_load_print_meta: n_head_kv        = 8
+llm_load_print_meta: n_rot            = 128
+llm_load_print_meta: n_swa            = 0
+llm_load_print_meta: n_embd_head_k    = 128
+llm_load_print_meta: n_embd_head_v    = 128
+llm_load_print_meta: n_gqa            = 3
+llm_load_print_meta: n_embd_k_gqa     = 1024
+llm_load_print_meta: n_embd_v_gqa     = 1024
+llm_load_print_meta: f_norm_eps       = 0.0e+00
+llm_load_print_meta: f_norm_rms_eps   = 1.0e-05
+llm_load_print_meta: f_clamp_kqv      = 0.0e+00
+llm_load_print_meta: f_max_alibi_bias = 0.0e+00
+llm_load_print_meta: f_logit_scale    = 0.0e+00
+llm_load_print_meta: n_ff             = 8192
+llm_load_print_meta: n_expert         = 0
+llm_load_print_meta: n_expert_used    = 0
+llm_load_print_meta: causal attn      = 1
+llm_load_print_meta: pooling type     = 0
+llm_load_print_meta: rope type        = 0
+llm_load_print_meta: rope scaling     = linear
+llm_load_print_meta: freq_base_train  = 500000.0
+llm_load_print_meta: freq_scale_train = 1
+llm_load_print_meta: n_ctx_orig_yarn  = 131072
+llm_load_print_meta: rope_finetuned   = unknown
+llm_load_print_meta: ssm_d_conv       = 0
+llm_load_print_meta: ssm_d_inner      = 0
+llm_load_print_meta: ssm_d_state      = 0
+llm_load_print_meta: ssm_dt_rank      = 0
+llm_load_print_meta: ssm_dt_b_c_rms   = 0
+llm_load_print_meta: model type       = ?B
+llm_load_print_meta: model ftype      = Q3_K - Large
+llm_load_print_meta: model params     = 3.21 B
+llm_load_print_meta: model size       = 1.68 GiB (4.50 BPW) 
+llm_load_print_meta: general.name     = Llama 3.2 3B Instruct
+llm_load_print_meta: BOS token        = 128000 '<|begin_of_text|>'
+llm_load_print_meta: EOS token        = 128009 '<|eot_id|>'
+llm_load_print_meta: LF token         = 128 'Ä'
+llm_load_print_meta: EOT token        = 128009 '<|eot_id|>'
+llm_load_print_meta: max token length = 256
+ggml_cuda_init: GGML_CUDA_FORCE_MMQ:    no
+ggml_cuda_init: GGML_CUDA_FORCE_CUBLAS: no
+ggml_cuda_init: found 1 CUDA devices:
+  Device 0: NVIDIA GeForce RTX 4070 Laptop GPU, compute capability 8.9, VMM: yes
+llm_load_tensors: ggml ctx size =    0.24 MiB
+llm_load_tensors: offloading 28 repeating layers to GPU
+llm_load_tensors: offloading non-repeating layers to GPU
+llm_load_tensors: offloaded 29/29 layers to GPU
+llm_load_tensors:        CPU buffer size =   308.23 MiB
+llm_load_tensors:      CUDA0 buffer size =  1723.78 MiB
+........................................................................
+llama_new_context_with_model: n_ctx      = 2048
+llama_new_context_with_model: n_batch    = 2048
+llama_new_context_with_model: n_ubatch   = 512
+llama_new_context_with_model: flash_attn = 0
+llama_new_context_with_model: freq_base  = 500000.0
+llama_new_context_with_model: freq_scale = 1
+llama_kv_cache_init:      CUDA0 KV buffer size =   224.00 MiB
+llama_new_context_with_model: KV self size  =  224.00 MiB, K (f16):  112.00 MiB, V (f16):  112.00 MiB
+llama_new_context_with_model:  CUDA_Host  output buffer size =     0.49 MiB
+llama_new_context_with_model:      CUDA0 compute buffer size =   256.50 MiB
+llama_new_context_with_model:  CUDA_Host compute buffer size =    10.01 MiB
+llama_new_context_with_model: graph nodes  = 902
+llama_new_context_with_model: graph splits = 2
+llama_init_from_gpt_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+main: llama threadpool init, n_threads = 8
+
+system_info: n_threads = 8 (n_threads_batch = 8) / 16 | AVX = 1 | AVX_VNNI = 0 | AVX2 = 1 | AVX512 = 1 | AVX512_VBMI = 1 | AVX512_VNNI = 1 | AVX512_BF16 = 1 | FMA = 1 | NEON = 0 | SVE = 0 | ARM_FMA = 0 | F16C = 1 | FP16_VA = 0 | RISCV_VECT = 0 | WASM_SIMD = 0 | BLAS = 1 | SSE3 = 1 | SSSE3 = 1 | VSX = 0 | MATMUL_INT8 = 0 | LLAMAFILE = 1 | 
+
+sampler seed: 1243276177
+sampler params: 
+	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+	top_k = 40, tfs_z = 1.000, top_p = 0.950, min_p = 0.050, typical_p = 1.000, temp = 0.800
+	mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000
+sampler chain: logits -> logit-bias -> penalties -> top-k -> tail-free -> typical -> top-p -> min-p -> temp-ext -> softmax -> dist 
+generate: n_ctx = 2048, n_batch = 2048, n_predict = 999, n_keep = 1
+
+Write a detailed, comprehensive essay explaining the history of the Linux kernel, its architecture, and why it became the dominant operating system for servers, supercomputers, and cloud infrastructure. Please provide at least three main sections, detailed technical examples, and a conclusion. 
+
+The Linux kernel is an open-source operating system kernel that has a rich history dating back to the late 1980s. It was created by Linus Torvalds, a Finnish computer science student, who was dissatisfied with the limited functionality and scalability of existing operating systems. Torvalds' vision was to create a kernel that was lightweight, modular, and easily extensible, which could be used as a foundation for a wide range of operating systems. 
+
+The Linux kernel's architecture is based on a monolithic design, where the kernel is the central component and manages the interactions between hardware and software components. The kernel is divided into several layers, including the device driver layer, the file system layer, and the network layer. Each layer is responsible for managing a specific aspect of the operating system, and the kernel acts as an intermediary between the hardware and the user-space applications. 
+
+One of the key features of the Linux kernel is its modularity, which allows developers to create and customize different modules for various applications. This modularity has enabled Linux to adapt to changing hardware and software requirements, making it a popular choice for developers and organizations. 
+
+The Linux kernel's adoption and success can be attributed to several factors, including its open-source model, which allows users to access and modify the source code, and its flexibility and scalability. The kernel's architecture and modularity have made it an attractive choice for server, supercomputer, and cloud infrastructure deployments. 
+
+**Section 1: The Early Days of Linux**
+
+The Linux kernel was first released in 1991 by Linus Torvalds, a Finnish computer science student at the University of Helsinki. The initial release was based on a Unix-like operating system, and it was designed to be lightweight and efficient. Torvalds was dissatisfied with the complexity and bloat of existing operating systems and sought to create a more streamlined and modular kernel. The first Linux kernel was released as a Unix-compatible system and included a basic set of device drivers and networking capabilities. 
+
+**Section 2: The Linux Kernel's Architecture**
+
+The Linux kernel's architecture is based on a monolithic design, where the kernel is the central component and manages the interactions between hardware and software components. The kernel is divided into several layers, including the device driver layer, the file system layer, and the network layer. Each layer is responsible for managing a specific aspect of the operating system, and the kernel acts as an intermediary between the hardware and the user-space applications. 
+
+The device driver layer is responsible for managing the interactions between the kernel and hardware devices, such as hard drives, graphics cards, and network interfaces. The file system layer manages the storage and retrieval of files, while the network layer handles communication with other systems and devices. The kernel's architecture is designed to be flexible and scalable, allowing developers to create and customize different modules for various applications. 
+
+**Section 3: Linux's Adoption and Success**
+
+The Linux kernel's adoption and success can be attributed to several factors, including its open-source model, which allows users to access and modify the source code. The kernel's flexibility and scalability have made it an attractive choice for server, supercomputer, and cloud infrastructure deployments. Linux's open-source model has also enabled a large community of developers to contribute to the kernel, ensuring its continued evolution and improvement. 
+
+In addition, Linux's modularity has allowed it to adapt to changing hardware and software requirements, making it a popular choice for developers and organizations. The kernel's lightweight design and efficient use of resources have also made it an attractive choice for organizations seeking to reduce their operating costs. 
+
+**Conclusion**
+
+In conclusion, the Linux kernel has a rich history dating back to the late 1980s, and its architecture is based on a monolithic design that manages interactions between hardware and software components. The kernel's modularity and flexibility have made it an attractive choice for developers and organizations, and its open-source model has enabled a large community of developers to contribute to the kernel. Linux's adoption and success can be attributed to its ability to adapt to changing hardware and software requirements, making it a popular choice for server, supercomputer, and cloud infrastructure deployments. 
+
+**Technical Examples**
+
+*   A study by the Linux Foundation found that 95% of the world's top supercomputers use Linux as their operating system. This is due to Linux's scalability and flexibility, which allow it to be easily customized and optimized for specific applications.
+*   A report by the market research firm, Gartner, found that Linux is the leading operating system for cloud infrastructure deployments, with 71% of cloud providers using Linux-based systems.
+*   A study by the Open Source Initiative found that Linux is the most widely used operating system for servers, with 83% of servers running Linux-based systems.
+
+**Technical Details**
+
+*   The Linux kernel is written in C programming language and is compiled using the GCC compiler.
+*   The kernel's device driver
+
+llama_perf_sampler_print:    sampling time =      48.62 ms /  1052 runs   (    0.05 ms per token, 21637.63 tokens per second)
+llama_perf_context_print:        load time =     773.59 ms
+llama_perf_context_print: prompt eval time =      30.94 ms /    53 tokens (    0.58 ms per token,  1713.27 tokens per second)
+llama_perf_context_print:        eval time =   11457.43 ms /   998 runs   (   11.48 ms per token,    87.11 tokens per second)
+llama_perf_context_print:       total time =   11658.05 ms /  1051 tokens

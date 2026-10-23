@@ -3,10 +3,10 @@
   "device": "780m",
   "quantization": "q3kl",
   "metrics": {
-    "prefill_tokens_per_second": 168.85,
-    "decode_tokens_per_second": 15.16,
-    "time_to_first_token_ms": 313.94,
-    "mean_power_watts": 48.46,
-    "energy_joules_per_token": 3.1975
+    "prefill_tokens_per_second": 176.86,
+    "decode_tokens_per_second": 17.67,
+    "time_to_first_token_ms": 299.67,
+    "mean_power_watts": 37.51,
+    "energy_joules_per_token": 2.1229
   }
 }

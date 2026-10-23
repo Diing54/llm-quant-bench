@@ -3,12 +3,13 @@
   "device": "rtx4070",
   "quantization": "q4km",
   "metrics": {
-    "prefill_tokens_per_second": 2143.66,
-    "decode_tokens_per_second": 81.23,
-    "time_to_first_token_ms": 24.75,
-    "mean_power_watts": 54.71,
-    "energy_joules_per_token": 0.6735
+    "prefill_tokens_per_second": 1896.75,
+    "decode_tokens_per_second": 80.75,
+    "time_to_first_token_ms": 29.7,
+    "mean_power_watts": 53.71,
+    "energy_joules_per_token": 0.6651
   },
-  "platform_profile": "low-power",
-  "hardware_tgp_watts": -1.0
+  "acpi_profile": "low-power",
+  "hardware_tgp_watts": 65.0,
+  "study": "power_constrained_sweep"
 }

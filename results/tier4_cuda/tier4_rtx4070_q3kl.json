@@ -3,10 +3,10 @@
   "device": "rtx4070",
   "quantization": "q3kl",
   "metrics": {
-    "prefill_tokens_per_second": 755.73,
-    "decode_tokens_per_second": 77.56,
-    "time_to_first_token_ms": 70.35,
-    "mean_power_watts": 52.16,
-    "energy_joules_per_token": 0.6724
+    "prefill_tokens_per_second": 897.06,
+    "decode_tokens_per_second": 87.39,
+    "time_to_first_token_ms": 59.09,
+    "mean_power_watts": 70.06,
+    "energy_joules_per_token": 0.8018
   }
 }

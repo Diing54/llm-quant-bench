@@ -1,0 +1,15 @@
+{
+  "tier": "tier4_balanced",
+  "device": "rtx4070",
+  "quantization": "f16",
+  "metrics": {
+    "prefill_tokens_per_second": 1059.67,
+    "decode_tokens_per_second": 32.21,
+    "time_to_first_token_ms": 50.96,
+    "mean_power_watts": 67.48,
+    "energy_joules_per_token": 2.0949
+  },
+  "acpi_profile": "balanced",
+  "hardware_tgp_watts": 75.0,
+  "study": "power_constrained_sweep"
+}
